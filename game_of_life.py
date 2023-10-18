@@ -14,33 +14,33 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import sys
 
-def eh(k):  # Error handling
+def eh(k):#Error handling
     try:
-        k = int(k)  # Convert input to an integer
-        if k <= 0:
+        k=int(k)#Convert input to an integer
+        if k<=0:
             raise ValueError("Cannot have a negative or zero k value")
         return k
     except ValueError as e:
-        print("Error: " + str(e))
+        print("Error: "+str(e))#Catches the error and throws in the statement
         sys.exit(1)
 
-if len(sys.argv) > 1:
-    k = eh(sys.argv[1])
+if len(sys.argv)>1: #implement the sys.argv to make it so we can type A value in the terminal
+    k=eh(sys.argv[1])
 else:
-    k = 100
+    k=100 #Default value
 
-grid = np.zeros((20, 20))  # Initialize the grid
-glider = [[False, False, True], [True, False, True], [False, True, True]]  # Make the true/false values
-grid[8:11, 8:11] = np.array(glider)  # Position the glider near the center
+grid=np.zeros((20,20)) #Initialize the grid
+glider=[[False, False, True], [True, False, True], [False, True, True]] #Make the true/false values
+grid[8:11, 8:11]=np.array(glider)  # Position the glider near the center
 
 def evolve(grid):  # The function for evolve
-    new_grid = np.zeros((20, 20))  # Make a new grid the same size as the original
+    new_grid=np.zeros((20, 20)) #Make a new grid the same size as the original
     for i in range(20):
-        for j in range(20):  # Nested loops for the rows/columns
-            if grid[i % 20, j % 20] == False:  # Conditions for the dead cells
-                if (grid[(i + 1) % 20, j % 20] + grid[(i - 1) % 20, j % 20] + grid[(i + 1) % 20, (j + 1) % 20] + grid[(i + 1) % 20, (j - 1) % 20] + grid[(i - 1) % 20, (j + 1) % 20] + grid[(i - 1) % 20, (j - 1) % 20] + grid[i % 20, (j + 1) % 20] + grid[i % 20, (j - 1) % 20]) == 3:
+        for j in range(20): #Nested loops for the rows/columns
+            if grid[i % 20, j % 20] == False: #Conditions for the dead cells
+                if (grid[(i + 1) % 20, j % 20] + grid[(i - 1) % 20, j % 20] + grid[(i + 1) % 20, (j + 1) % 20] + grid[(i + 1) % 20, (j - 1) % 20] + grid[(i - 1) % 20, (j + 1) % 20] + grid[(i - 1) % 20, (j - 1) % 20] + grid[i % 20, (j + 1) % 20] + grid[i % 20, (j - 1) % 20]) == 3:#Sum of all the neighboring values (TRUE=1, FALSE=0)
                     new_grid[i % 20, j % 20] = True
-            if grid[i % 20, j % 20] == True:  # Conditions for the live cells
+            if grid[i % 20, j % 20] == True: #Conditions for the live cells
                 if (grid[(i + 1) % 20, j % 20] + grid[(i - 1) % 20, j % 20] + grid[(i + 1) % 20, (j + 1) % 20] + grid[(i + 1) % 20, (j - 1) % 20] + grid[(i - 1) % 20, (j + 1) % 20] + grid[(i - 1) % 20, (j - 1) % 20] + grid[i % 20, (j + 1) % 20] + grid[i % 20, (j - 1) % 20]) > 3:
                     new_grid[i % 20, j % 20] = False
                 if 2 <= (grid[(i + 1) % 20, j % 20] + grid[(i - 1) % 20, j % 20] + grid[(i + 1) % 20, (j + 1) % 20] + grid[(i + 1) % 20, (j - 1) % 20] + grid[(i - 1) % 20, (j + 1) % 20] + grid[(i - 1) % 20, (j - 1) % 20] + grid[i % 20, (j + 1) % 20] + grid[i % 20, (j - 1) % 20]) <= 3:
@@ -49,25 +49,24 @@ def evolve(grid):  # The function for evolve
                     new_grid[i % 20, j % 20] = False
     return new_grid
 
-def visualize(grid):  # The function to visualize the grid
+def visualize(grid):  #The function to visualize the grid
     plt.imshow(grid, cmap='binary')
 
 try:
     for i in range(k):
-        if i % 10 == 0:  # Use it in this loop with the modular function helping the image print out after every tenth step
+        if i%10==0:  # Use it in this loop with the modular function helping the image print out after every tenth step
             visualize(grid)
-        grid = evolve(grid
-        )
-    fig, ax = plt.subplots()
-    def animate(frame):
+        grid=evolve(grid)
+    fig, ax=plt.subplots() #Make subplots for the video
+    def animate(frame): #Defining a function that will make the animation
         ax.clear()
         ax.imshow(grid, cmap='binary')
-        grid[:] = evolve(grid)
+        grid[:]=evolve(grid) #So that the evolve function can work
     video = animation.FuncAnimation(fig, animate, frames=k, interval=100)  # Make the video with the animation.FuncAnimation function
-    plt.imsave('game_of_life.png', grid, cmap='binary')  # Save the final image
-    video.save('game_of_life.gif', writer='pillow', fps=10)  # Save the video
+    plt.imsave('game_of_life.png', grid, cmap='binary') #Save the final image
+    video.save('game_of_life.gif', writer='pillow', fps=10)  #Save the video, pillow method makes it into a gif
     plt.imshow(grid, cmap='binary')
     plt.colorbar()
     plt.show()
-except Exception as e:
-    print("An error occurred: " + str(e))
+except Exception as e: #Exception in case something goes wrong during the video making
+    print("An error occurred: "+str(e))
