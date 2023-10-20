@@ -14,3 +14,5 @@ To run the code, if you are using an Anaconda Terminal or other terminal, just t
 There were no functions for the first part, there was just matrix operations to get a rank vector, and eigenvalues and eigenvectors of the normalized matrixm "M", just simply type "python" in the terminal and the file name and it should give a long list a vectors that eventually show a convergence, and the Eigenvector of M and the ranking vector, r after the convergence. 
 
 The nplinalg, loop and dot product were used. 
+
+To run the code, just go to a terminal, type "pyhton" and the file name.
