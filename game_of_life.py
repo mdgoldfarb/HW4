@@ -15,6 +15,19 @@ import matplotlib.animation as animation
 import sys
 
 def eh(k):#Error handling
+     """
+    Error handling function for ensuring k is a positive integer.
+
+    Parameters:
+        k (int): The value of k to be validated.
+
+    Returns:
+        int: If k is a positive integer.
+
+    Raises:
+        ValueError: If k is not a positive integer.
+
+    """
     try:
         k=int(k)#Convert input to an integer
         if k<=0:
@@ -34,6 +47,16 @@ glider=[[False, False, True], [True, False, True], [False, True, True]] #Make th
 grid[8:11, 8:11]=np.array(glider)  # Position the glider near the center
 
 def evolve(grid):  # The function for evolve
+     """
+    Function to evolve the grid according to the rules of Conway's Game of Life.
+
+    Parameters:
+        grid (numpy.ndarray): The current state of the grid.
+
+    Returns:
+        numpy.ndarray: The updated grid after one iteration.
+
+    """
     new_grid=np.zeros((20, 20)) #Make a new grid the same size as the original
     for i in range(20):
         for j in range(20): #Nested loops for the rows/columns
@@ -50,6 +73,13 @@ def evolve(grid):  # The function for evolve
     return new_grid
 
 def visualize(grid):  #The function to visualize the grid
+    """
+    Function to visualize the grid using Matplotlib.
+
+    Parameters:
+        grid (numpy.ndarray): The grid to be visualized.
+
+    """
     plt.imshow(grid, cmap='binary')
 
 try:
@@ -59,6 +89,13 @@ try:
         grid=evolve(grid)
     fig, ax=plt.subplots() #Make subplots for the video
     def animate(frame): #Defining a function that will make the animation
+        """
+    Function to animate the evolution of the grid and update the display.
+
+    Parameters:
+        frame (int): The current frame number in the animation.
+
+    """
         ax.clear()
         ax.imshow(grid, cmap='binary')
         grid[:]=evolve(grid) #So that the evolve function can work
