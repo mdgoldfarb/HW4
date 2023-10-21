@@ -16,17 +16,12 @@ import sys
 
 def eh(k):#Error handling
      """
-    Error handling function for ensuring k is a positive integer.
-    
+    The Error Handling functions helps make it so k is a positive integer through a try except block
     Parameters:
         k (int): The value of k to be validated.
-
-    Returns:
-        int: If k is a positive integer.
-
-    Raises:
-        ValueError: If k is not a positive integer.
-
+    Output(s):
+        If k is a positive integer, the code will continue.
+        If k is not a positive integer, it raises the error message
     """
     try:
         k=int(k)#Convert input to an integer
@@ -48,14 +43,11 @@ grid[8:11, 8:11]=np.array(glider)  # Position the glider near the center
 
 def evolve(grid):  # The function for evolve
      """
-    Function to evolve the grid according to the rules of Conway's Game of Life.
-
+    The evolve function updates the grid according to the rules of Conway's Game of Life for one iteration using nested loops and conditional statements based off the sum of the neighbors of the current block. A new grid is made of the same size and its squares will be updated based on the original grid
     Parameters:
-        grid (numpy.ndarray): The current state of the grid.
-
-    Returns:
-        numpy.ndarray: The updated grid after one iteration.
-
+        A grid which is a grid using numpy, usually.
+    Output:
+        The updated grid using the original grid.
     """
     new_grid=np.zeros((20, 20)) #Make a new grid the same size as the original
     for i in range(20):
@@ -74,11 +66,11 @@ def evolve(grid):  # The function for evolve
 
 def visualize(grid):  #The function to visualize the grid
     """
-    Function to visualize the grid using Matplotlib.
-
+    The visualize function is to visualize the grid using Matplotlib. This is used for showing the updates to the original grid after using the evolve function.
     Parameters:
-        grid (numpy.ndarray): The grid to be visualized.
-
+        The grid to be visualized.
+    Output: 
+        The visualized grid which is on a plane with a black/white scale.
     """
     plt.imshow(grid, cmap='binary')
 
@@ -90,11 +82,12 @@ try:
     fig, ax=plt.subplots() #Make subplots for the video
     def animate(frame): #Defining a function that will make the animation
         """
-    Function to animate the evolution of the grid and update the display.
+    The animate function is to show the evolution of the grid and update the display. It has ax and fig to make subplots of the grid and use the evolve function recursively.
 
     Parameters:
-        frame (int): The current frame number in the animation.
-
+        The current frame number in the animation which is an integer and it goes through a loop.
+    Output:
+        It goes through the video (FuncAnimation) function which makes it a gif with k frames of the grid and the rotating glider or other shape in the Game of Life.
     """
         ax.clear()
         ax.imshow(grid, cmap='binary')
