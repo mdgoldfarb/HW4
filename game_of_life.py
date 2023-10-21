@@ -17,7 +17,7 @@ import sys
 def eh(k):#Error handling
      """
     Error handling function for ensuring k is a positive integer.
-
+    
     Parameters:
         k (int): The value of k to be validated.
 
