@@ -7,10 +7,31 @@ Original file is located at
     https://colab.research.google.com/drive/1Eheez8R0rLx9WhIwr73Cxj-FMr8eIvrL
 """
 
-#Breif Overview:
+'''#Breif Overview:
 #This script's purpose is to take a page matrix from online and finding its page rank through matrix multiplcation and alpha values and summations
 #The rank of the matrix should be associated with an eigenvector of the matrix associated with the highest eigenvalue when alpha is 1
 #The eigenvector and rank's difference in values should be affected by the alpha value
+
+functions:
+    np.array: makes an array of the original matrix
+        parameters: a list of rows/columns list
+    
+    np.sum(): takes the sum of an array
+        parameters: columns of a matrix
+    
+    np.dot(): takes the matrix product of two matrices (inner dimenesions must be the same)
+        parameters: matrix 1, matrix 2
+
+    np.linalg.norm(): takes the suqared values of a matrix and square roots the sum of it
+        parameters: a matrix
+
+    np.linalg.eig(): gets the eigenvectors and eigenvalues of a matrix
+        parameters: a matrix
+
+    np.argmax(): Takes the index of the largest argument in a list
+        parameters: a list
+    
+'''
 
 import numpy as np #import proper libraries
 A =np.array([[0, 1, 1, 0, 0, 0],
